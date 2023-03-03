@@ -1,7 +1,7 @@
-Minnesota COVID Report
+Alabama COVID Report
 ================
 
-Report last run: 2023-03-03 21:14:55
+Report last run: 2023-03-03 15:30:11
 
 ## Introduction
 
@@ -39,21 +39,21 @@ rate_data <- county_data %>%
   mutate(rate_last = totalcases_last / pop * POP_DENOM)
 ```
 
-### Minnesota
+### Alabama
 
 Here is a plot of COVID-19 rates since Jan. 1, 2023 in the 10 most
-populous Minnesota counties:
+populous Alabama counties:
 
 ``` r
 ## Identify the top 10 most populous counties
-top10_pop <- pops %>% filter(state == "Minnesota") %>%
+top10_pop <- pops %>% filter(state == "Alabama") %>%
   arrange(desc(pop)) %>%
   slice(1:10) %>%
   mutate(county = factor(county))
 
 ## Make the plot
 rate_data %>%
-    filter(state == "Minnesota", 
+    filter(state == "Alabama", 
          county %in% top10_pop$county,
          date > Sys.Date() - 30) %>%
   ggplot(aes(x = date, y = rate_last, color = county)) +
@@ -62,7 +62,7 @@ rate_data %>%
   ylab("7-day COVID-19 case total per 100,000 population") +
   scale_color_discrete(name = "") +
   theme_minimal() +
-  ggtitle("COVID-19 rates for the ten most populous Minnesota counties", 
+  ggtitle("COVID-19 rates for the ten most populous Alabama counties", 
           subtitle = paste("Latest data:", max(rate_data$date)))
 ```
 
